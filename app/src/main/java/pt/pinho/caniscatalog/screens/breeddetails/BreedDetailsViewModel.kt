@@ -1,10 +1,6 @@
-package pt.pinho.caniscatalog.screens.homescreen
+package pt.pinho.caniscatalog.screens.breeddetails
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,37 +11,39 @@ import pt.pinho.caniscatalog.screens.UiState
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeScreenViewModel @Inject constructor(
+class BreedDetailsViewModel @Inject constructor(
     private val dogBreedRepo: DogBreedRepository,
 ): ViewModel() {
     private val _uiState = MutableLiveData<UiState>(UiState.NoData)
     val uiState: LiveData<UiState>
         get() = _uiState
 
-    private val _uiBreedList = MutableLiveData<List<DogBreed>>()
-    val uiBreedList: LiveData<List<DogBreed>>
-        get() = _uiBreedList
+    private val _uiBreed = MutableLiveData<DogBreed>(null)
+    val uiBreed: LiveData<DogBreed>
+        get() = _uiBreed
 
-    init {
-        getAllBreeds()
-    }
-
-    fun getAllBreeds() {
+    fun getDogBreedById(breedId: Long)
+    {
         viewModelScope.launch {
             _uiState.postValue(UiState.Loading)
-            val response = dogBreedRepo.getDogBreeds();
+            val response = dogBreedRepo.getDogBreedById(breedId);
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
-
-                    Log.v("Body", response.body().toString())
-
-                    _uiBreedList.postValue(response.body())
-                    _uiState.postValue(UiState.Loaded)
+                    if (response.body() != null)
+                    {
+                        response.body()?.let {
+                            _uiBreed.postValue(it)
+                            _uiState.postValue(UiState.Loaded)
+                        }
+                    }
+                    else
+                    {
+                        _uiState.postValue(UiState.NoData)
+                    }
                 } else {
                     //onError("Error : ${response.message()} ")
                 }
             }
         }
-
     }
 }

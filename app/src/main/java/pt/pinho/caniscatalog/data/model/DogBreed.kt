@@ -13,11 +13,17 @@ data class DogBreed (
     val referenceImageID: String,
     val image: Image
 )
+{
+    constructor() : this(Measure(), Measure(), -1, "", "", "", "", "", "", "", Image())
+}
 
 data class Measure (
     val imperial: String,
     val metric: String
 )
+{
+    constructor(): this("", "")
+}
 
 data class Image (
     val id: String,
@@ -25,3 +31,6 @@ data class Image (
     val height: Long,
     val url: String
 )
+{
+    constructor(): this("", 0, 0, "")
+}

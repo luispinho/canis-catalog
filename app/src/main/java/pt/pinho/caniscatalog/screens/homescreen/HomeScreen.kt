@@ -12,11 +12,13 @@ import androidx.compose.ui.Modifier
 import coil.annotation.ExperimentalCoilApi
 import pt.pinho.caniscatalog.data.model.DogBreed
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.navigation.NavController
+import pt.pinho.caniscatalog.screens.UiState
 
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable
-fun HomeScreen(homeScreenViewModel: HomeScreenViewModel) {
+fun HomeScreen(homeScreenViewModel: HomeScreenViewModel, navController: NavController) {
     val breedList: List<DogBreed> by homeScreenViewModel.uiBreedList.observeAsState(emptyList())
     val uiState: UiState by homeScreenViewModel.uiState.observeAsState(UiState.NoData)
 
@@ -27,7 +29,7 @@ fun HomeScreen(homeScreenViewModel: HomeScreenViewModel) {
     ) {
         if (uiState == UiState.Loaded)
         {
-            DogBreedsList(breedList)
+            DogBreedsList(breedList, navController)
         }
         else if (uiState == UiState.Loading)
         {

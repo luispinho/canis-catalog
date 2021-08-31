@@ -8,4 +8,7 @@ import javax.inject.Inject
 class DogBreedRepository @Inject constructor(private val dogAPIService: DogAPIService) {
 
     suspend fun getDogBreeds() = dogAPIService.getDogBreeds()
+
+    suspend fun getDogBreedById(breedId: Long) = dogAPIService.getDogBreedById(breedId)
+
 }

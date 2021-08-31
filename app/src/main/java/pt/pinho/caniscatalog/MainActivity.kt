@@ -13,13 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavType
+import androidx.navigation.compose.*
 import dagger.hilt.android.AndroidEntryPoint
-import pt.pinho.caniscatalog.screens.homescreen.HomeScreen
 import pt.pinho.caniscatalog.screens.SearchScreen
+import pt.pinho.caniscatalog.screens.breeddetails.BreedDetailsScreen
+import pt.pinho.caniscatalog.screens.breeddetails.BreedDetailsViewModel
+import pt.pinho.caniscatalog.screens.homescreen.HomeScreen
 import pt.pinho.caniscatalog.screens.homescreen.HomeScreenViewModel
 import pt.pinho.caniscatalog.ui.theme.CanisCatalogTheme
 
@@ -27,20 +27,21 @@ import pt.pinho.caniscatalog.ui.theme.CanisCatalogTheme
 class MainActivity : ComponentActivity() {
 
     private val homeScreenViewModel: HomeScreenViewModel by viewModels()
+    private val breedDetailsScreenViewModel: BreedDetailsViewModel by viewModels()
 
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MainScreen(homeScreenViewModel)
+            MainScreen(homeScreenViewModel, breedDetailsScreenViewModel)
         }
     }
 }
 
 @ExperimentalFoundationApi
 @Composable
-fun MainScreen(homeScreenViewModel: HomeScreenViewModel) {
+fun MainScreen(homeScreenViewModel: HomeScreenViewModel, breedDetailsScreenViewModel: BreedDetailsViewModel) {
 
     CanisCatalogTheme {
         val items = listOf(
@@ -73,7 +74,8 @@ fun MainScreen(homeScreenViewModel: HomeScreenViewModel) {
             }
         ) { innerPadding ->
             NavHost(navController, startDestination = Screen.Home.route, Modifier.padding(innerPadding)) {
-                composable(Screen.Home.route) { HomeScreen(homeScreenViewModel) }
+                composable(Screen.Home.route) { HomeScreen(homeScreenViewModel, navController) }
+                composable(Screen.BreedDetails.route, arguments = listOf(navArgument("breedId") { type = NavType.LongType })) { backStackEntry -> BreedDetailsScreen(breedDetailsScreenViewModel, backStackEntry.arguments?.getLong("breedId")) }
                 composable(Screen.Search.route) { SearchScreen() }
             }
         }
