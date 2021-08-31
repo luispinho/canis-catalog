@@ -3,35 +3,45 @@ package pt.pinho.caniscatalog
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import pt.pinho.caniscatalog.screens.HomeScreen
+import dagger.hilt.android.AndroidEntryPoint
+import pt.pinho.caniscatalog.screens.homescreen.HomeScreen
 import pt.pinho.caniscatalog.screens.SearchScreen
+import pt.pinho.caniscatalog.screens.homescreen.HomeScreenViewModel
 import pt.pinho.caniscatalog.ui.theme.CanisCatalogTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val homeScreenViewModel: HomeScreenViewModel by viewModels()
+
+    @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MainScreen()
+            MainScreen(homeScreenViewModel)
         }
     }
 }
 
+@ExperimentalFoundationApi
 @Composable
-fun MainScreen() {
+fun MainScreen(homeScreenViewModel: HomeScreenViewModel) {
+
     CanisCatalogTheme {
         val items = listOf(
             Screen.Home,
@@ -63,15 +73,9 @@ fun MainScreen() {
             }
         ) { innerPadding ->
             NavHost(navController, startDestination = Screen.Home.route, Modifier.padding(innerPadding)) {
-                composable(Screen.Home.route) { HomeScreen() }
+                composable(Screen.Home.route) { HomeScreen(homeScreenViewModel) }
                 composable(Screen.Search.route) { SearchScreen() }
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MainScreen()
 }
