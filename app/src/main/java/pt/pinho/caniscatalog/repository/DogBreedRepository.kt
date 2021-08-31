@@ -11,4 +11,5 @@ class DogBreedRepository @Inject constructor(private val dogAPIService: DogAPISe
 
     suspend fun getDogBreedById(breedId: Long) = dogAPIService.getDogBreedById(breedId)
 
+    suspend fun getDogBreedById(searchQuery: String) = dogAPIService.getDogBreedsByBreed(searchQuery)
 }
