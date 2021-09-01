@@ -1,6 +1,7 @@
 package pt.pinho.caniscatalog
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -56,24 +57,27 @@ fun MainScreen(homeScreenViewModel: HomeScreenViewModel,
         val navController = rememberNavController()
         Scaffold(
             bottomBar = {
-                BottomNavigation {
-                    val navBackStackEntry by navController.currentBackStackEntryAsState()
-                    val currentDestination = navBackStackEntry?.destination
-                    items.forEach { screen ->
-                        BottomNavigationItem(
-                            icon = { Icon(screen.icon, contentDescription = null) },
-                            label = { Text(stringResource(screen.titleResourceId)) },
-                            selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                            onClick = {
-                                navController.navigate(screen.route) {
-                                    popUpTo(navController.graph.findStartDestination().id) {
-                                        saveState = true
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentDestination = navBackStackEntry?.destination
+
+                if (currentDestination?.route != Screen.BreedDetails.route) {
+                    BottomNavigation {
+                        items.forEach { screen ->
+                            BottomNavigationItem(
+                                icon = { Icon(screen.icon, contentDescription = null) },
+                                label = { Text(stringResource(screen.titleResourceId)) },
+                                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                                onClick = {
+                                    navController.navigate(screen.route) {
+                                        popUpTo(navController.graph.findStartDestination().id) {
+                                            saveState = true
+                                        }
+                                        launchSingleTop = true
+                                        restoreState = true
                                     }
-                                    launchSingleTop = true
-                                    restoreState = true
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }
