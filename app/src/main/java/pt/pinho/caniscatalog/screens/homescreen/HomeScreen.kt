@@ -4,7 +4,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -13,6 +12,7 @@ import coil.annotation.ExperimentalCoilApi
 import pt.pinho.caniscatalog.data.model.DogBreed
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.navigation.NavController
+import pt.pinho.caniscatalog.component.CenteredCircularLoader
 import pt.pinho.caniscatalog.screens.UiState
 
 @ExperimentalCoilApi
@@ -33,7 +33,7 @@ fun HomeScreen(homeScreenViewModel: HomeScreenViewModel, navController: NavContr
         }
         else if (uiState == UiState.Loading)
         {
-            CircularProgressIndicator()
+            CenteredCircularLoader()
         }
     }
 }

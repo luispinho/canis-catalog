@@ -7,5 +7,5 @@ object DogAPIConstants {
     const val API_TOKEN = BuildConfig.THE_DOG_API_KEY
     const val BREEDS_URL = "breeds/"
     const val BREEDS_ID_URL = "${BREEDS_URL}{breed_id}"
-    const val BREEDS_SEARCH_URL = "${BREEDS_URL}search?q={search_query}"
+    const val BREEDS_SEARCH_URL = "${BREEDS_URL}search"
 }

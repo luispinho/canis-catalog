@@ -17,7 +17,6 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import pt.pinho.caniscatalog.data.model.DogBreed
 
-@ExperimentalCoilApi
 @Composable
 fun SearchResultListItem(dogBreed: DogBreed, navController: NavController) {
     Card (

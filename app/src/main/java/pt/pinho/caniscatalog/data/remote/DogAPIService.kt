@@ -15,5 +15,5 @@ interface DogAPIService {
     suspend fun getDogBreedById(@Path("breed_id") id: Long) : Response<DogBreed>
 
     @GET(DogAPIConstants.BREEDS_SEARCH_URL)
-    suspend fun getDogBreedsByBreed(@Path("search_query") searchQuery: String) : Response<List<DogBreed>>
+    suspend fun getDogBreedsByBreed(@Query("q") searchQuery: String) : Response<List<DogBreed>>
 }
