@@ -1,10 +1,18 @@
 package pt.pinho.caniscatalog.data.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "dog_breed")
 data class DogBreed (
+    @Embedded(prefix = "weight_")
     val weight: Measure,
+    @Embedded(prefix = "height_")
     val height: Measure,
+    @PrimaryKey
     val id: Long,
     val name: String,
     @SerializedName("breed_for")
@@ -17,6 +25,7 @@ data class DogBreed (
     val origin: String,
     @SerializedName("reference_image_id")
     val referenceImageID: String,
+    @Embedded
     val image: Image
 )
 {
@@ -32,6 +41,7 @@ data class Measure (
 }
 
 data class Image (
+    @ColumnInfo(name = "image_id")
     val id: String,
     val width: Long,
     val height: Long,

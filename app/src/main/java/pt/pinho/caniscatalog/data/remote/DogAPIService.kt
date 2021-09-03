@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface DogAPIService {
 
     @GET(DogAPIConstants.BREEDS_URL)
-    suspend fun getDogBreeds() : Response<List<DogBreed>>
+    suspend fun getDogBreeds(@Query("limit") limit: Int, @Query("page") page: Int) : Response<List<DogBreed>>
 
     @GET(DogAPIConstants.BREEDS_ID_URL)
     suspend fun getDogBreedById(@Path("breed_id") id: Long) : Response<DogBreed>
