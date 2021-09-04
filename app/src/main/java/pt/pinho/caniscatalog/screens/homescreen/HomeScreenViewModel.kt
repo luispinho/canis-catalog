@@ -2,6 +2,7 @@ package pt.pinho.caniscatalog.screens.homescreen
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,4 +30,6 @@ class HomeScreenViewModel @Inject constructor(
     val breeds = Pager(PagingConfig(pageSize = 20)) {
         DogBreedSource(dogBreedRepo)
     }.flow.cachedIn(viewModelScope)
+
+    val showListAsGrid = mutableStateOf(false)
 }

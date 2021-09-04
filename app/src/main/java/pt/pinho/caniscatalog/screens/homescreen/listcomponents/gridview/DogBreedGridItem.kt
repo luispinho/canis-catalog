@@ -1,13 +1,9 @@
-package pt.pinho.caniscatalog.screens.homescreen
+package pt.pinho.caniscatalog.screens.homescreen.listcomponents.gridview
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -22,12 +18,12 @@ import pt.pinho.caniscatalog.data.model.DogBreed
 
 @ExperimentalCoilApi
 @Composable
-fun DogBreedListItem(dogBreed: DogBreed, navController: NavController) {
+fun DogBreedGridItem(dogBreed: DogBreed, navController: NavController) {
     Card (
         shape = RoundedCornerShape(3.dp),
         backgroundColor = Color.LightGray,
         border = BorderStroke(0.5.dp, Color.Black),
-        modifier = Modifier.padding(4.dp).fillMaxSize(),
+        modifier = Modifier.padding(4.dp).height(190.dp),
     ) {
         Column(modifier = Modifier.clickable(
             onClick = { navController.navigate("breed_details/${dogBreed.id}")

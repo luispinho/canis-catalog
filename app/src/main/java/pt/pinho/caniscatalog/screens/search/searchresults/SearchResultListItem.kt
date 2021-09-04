@@ -1,4 +1,4 @@
-package pt.pinho.caniscatalog.screens.search
+package pt.pinho.caniscatalog.screens.search.searchresults
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable

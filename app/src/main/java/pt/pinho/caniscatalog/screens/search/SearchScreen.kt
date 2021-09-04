@@ -19,6 +19,7 @@ import pt.pinho.caniscatalog.R
 import pt.pinho.caniscatalog.component.CenteredCircularLoader
 import pt.pinho.caniscatalog.data.model.DogBreed
 import pt.pinho.caniscatalog.screens.UiState
+import pt.pinho.caniscatalog.screens.search.searchresults.SearchResultList
 
 @ExperimentalFoundationApi
 @Composable
