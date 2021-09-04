@@ -1,4 +1,4 @@
-package pt.pinho.caniscatalog.component
+package pt.pinho.caniscatalog.shared.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

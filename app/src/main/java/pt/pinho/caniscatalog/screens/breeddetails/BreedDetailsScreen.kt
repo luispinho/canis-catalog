@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import pt.pinho.caniscatalog.R
-import pt.pinho.caniscatalog.component.CenteredCircularLoader
+import pt.pinho.caniscatalog.shared.component.CenteredCircularLoader
 import pt.pinho.caniscatalog.data.model.DogBreed
 import pt.pinho.caniscatalog.screens.UiState
 

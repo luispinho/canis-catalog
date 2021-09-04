@@ -8,7 +8,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import coil.annotation.ExperimentalCoilApi
-import pt.pinho.caniscatalog.component.CenteredCircularLoader
+import pt.pinho.caniscatalog.shared.component.CenteredCircularLoader
 import pt.pinho.caniscatalog.data.model.DogBreed
 
 @ExperimentalCoilApi
