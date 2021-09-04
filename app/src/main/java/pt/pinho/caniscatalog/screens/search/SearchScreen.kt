@@ -27,8 +27,6 @@ fun SearchScreen(searchScreenViewModel: SearchScreenViewModel, navController: Na
     val breedList: List<DogBreed> by searchScreenViewModel.uiBreedList.observeAsState(emptyList())
     val uiState: UiState by searchScreenViewModel.uiState.observeAsState(UiState.Initial)
 
-    var text by remember { mutableStateOf("") }
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -45,13 +43,13 @@ fun SearchScreen(searchScreenViewModel: SearchScreenViewModel, navController: Na
                 horizontalArrangement = Arrangement.Center
                 ) {
                 OutlinedTextField(
-                    value = text,
-                    onValueChange = { text = it },
+                    value = searchScreenViewModel.searchQuery.value,
+                    onValueChange = { searchScreenViewModel.searchQuery.value = it },
                     label = { Text(stringResource(id = R.string.search_text_input_label)) },
                     shape = RoundedCornerShape(50),
                     trailingIcon = {
                         OutlinedButton(
-                            onClick = { searchScreenViewModel.getBreedsBySearch(text) },
+                            onClick = { searchScreenViewModel.getBreedsBySearch(searchScreenViewModel.searchQuery.value) },
                             colors = ButtonDefaults.outlinedButtonColors(),
                             shape = RoundedCornerShape(50),
                             modifier = Modifier.padding(horizontal = 8.dp)

@@ -1,6 +1,5 @@
 package pt.pinho.caniscatalog.data
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import pt.pinho.caniscatalog.data.model.DogBreed

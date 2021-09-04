@@ -1,13 +1,12 @@
 package pt.pinho.caniscatalog.screens.search
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import pt.pinho.caniscatalog.data.model.DogBreed
 import pt.pinho.caniscatalog.repository.DogBreedRepository
 import pt.pinho.caniscatalog.screens.UiState
@@ -25,26 +24,24 @@ class SearchScreenViewModel @Inject constructor(
     val uiBreedList: LiveData<List<DogBreed>>
         get() = _uiBreedList
 
+    var searchQuery = mutableStateOf("")
+
     fun getBreedsBySearch(searchQuery: String) {
         viewModelScope.launch {
             _uiState.postValue(UiState.Loading)
 
             val response = dogBreedRepo.getDogBreedByBreedSearch(searchQuery)
 
-            withContext(Dispatchers.Main) {
-                if (response.isSuccessful) {
+            if (response != null) {
+                _uiBreedList.postValue(response)
 
-                    _uiBreedList.postValue(response.body())
-
-                    if (response.body()?.isNotEmpty() == true) {
-                        _uiState.postValue(UiState.Loaded)
-                    } else {
-                        _uiState.postValue(UiState.NoData)
-                    }
-
+                if (response.isNotEmpty()) {
+                    _uiState.postValue(UiState.Loaded)
                 } else {
-                    _uiState.postValue(UiState.LoadingError)
+                    _uiState.postValue(UiState.NoData)
                 }
+            } else {
+                _uiState.postValue(UiState.LoadingError)
             }
         }
     }
