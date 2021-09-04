@@ -18,7 +18,7 @@ import javax.inject.Inject
 class SearchScreenViewModel @Inject constructor(
     private val dogBreedRepo: DogBreedRepository,
 ): ViewModel() {
-    private val _uiState = MutableLiveData<UiState>(UiState.NoData)
+    private val _uiState = MutableLiveData<UiState>(UiState.Initial)
     val uiState: LiveData<UiState>
         get() = _uiState
 
@@ -29,16 +29,22 @@ class SearchScreenViewModel @Inject constructor(
     fun getBreedsBySearch(searchQuery: String) {
         viewModelScope.launch {
             _uiState.postValue(UiState.Loading)
+
             val response = dogBreedRepo.getDogBreedByBreedSearch(searchQuery)
+
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
 
-                    Log.v("Body", response.body().toString())
-
                     _uiBreedList.postValue(response.body())
-                    _uiState.postValue(UiState.Loaded)
+
+                    if (response.body()?.isNotEmpty() == true) {
+                        _uiState.postValue(UiState.Loaded)
+                    } else {
+                        _uiState.postValue(UiState.NoData)
+                    }
+
                 } else {
-                    //onError("Error : ${response.message()} ")
+                    _uiState.postValue(UiState.LoadingError)
                 }
             }
         }

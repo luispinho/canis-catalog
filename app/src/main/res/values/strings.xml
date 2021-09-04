@@ -9,5 +9,8 @@
     <string name="breed_origin">Origin</string>
     <string name="breed_temperament">Temperament</string>
     <string name="breed_group">Group</string>
+    <string name="no_results_found">No results found 😕</string>
+    <string name="search_text_input_label">Search</string>
+    <string name="loading_data_generic_error_message">There was an issue loading your data 😕</string>
 
 </resources>

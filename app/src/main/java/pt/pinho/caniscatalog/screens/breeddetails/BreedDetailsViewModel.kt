@@ -14,7 +14,7 @@ import javax.inject.Inject
 class BreedDetailsViewModel @Inject constructor(
     private val dogBreedRepo: DogBreedRepository,
 ): ViewModel() {
-    private val _uiState = MutableLiveData<UiState>(UiState.NoData)
+    private val _uiState = MutableLiveData<UiState>(UiState.Initial)
     val uiState: LiveData<UiState>
         get() = _uiState
 

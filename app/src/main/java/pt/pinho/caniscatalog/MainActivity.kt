@@ -67,6 +67,7 @@ fun MainScreen(homeScreenViewModel: HomeScreenViewModel,
                                 icon = { Icon(screen.icon, contentDescription = null) },
                                 label = { Text(stringResource(screen.titleResourceId)) },
                                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                                alwaysShowLabel = false,
                                 onClick = {
                                     navController.navigate(screen.route) {
                                         popUpTo(navController.graph.findStartDestination().id) {
@@ -84,7 +85,7 @@ fun MainScreen(homeScreenViewModel: HomeScreenViewModel,
         ) { innerPadding ->
             NavHost(navController, startDestination = Screen.Home.route, Modifier.padding(innerPadding)) {
                 composable(Screen.Home.route) { HomeScreen(homeScreenViewModel, navController) }
-                composable(Screen.BreedDetails.route, arguments = listOf(navArgument("breedId") { type = NavType.LongType })) { backStackEntry -> BreedDetailsScreen(breedDetailsScreenViewModel, backStackEntry.arguments?.getLong("breedId")) }
+                composable(Screen.BreedDetails.route, arguments = listOf(navArgument("breedId") { type = NavType.LongType })) { backStackEntry -> BreedDetailsScreen(breedDetailsScreenViewModel, backStackEntry.arguments?.getLong("breedId"), navController) }
                 composable(Screen.Search.route) { SearchScreen(searchScreenScreenViewModel, navController) }
             }
         }
