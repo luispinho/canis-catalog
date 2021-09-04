@@ -24,25 +24,20 @@ class BreedDetailsViewModel @Inject constructor(
 
     fun getDogBreedById(breedId: Long)
     {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
+
             _uiState.postValue(UiState.Loading)
-            val response = dogBreedRepo.getDogBreedById(breedId);
-            withContext(Dispatchers.Main) {
-                if (response.isSuccessful) {
-                    if (response.body() != null)
-                    {
-                        response.body()?.let {
-                            _uiBreed.postValue(it)
-                            _uiState.postValue(UiState.Loaded)
-                        }
-                    }
-                    else
-                    {
-                        _uiState.postValue(UiState.NoData)
-                    }
-                } else {
-                    //onError("Error : ${response.message()} ")
-                }
+
+            val breedQueryResult = dogBreedRepo.getDogBreedById(breedId)
+
+            if (breedQueryResult != null)
+            {
+                _uiBreed.postValue(breedQueryResult)
+                _uiState.postValue(UiState.Loaded)
+            }
+            else
+            {
+                _uiState.postValue(UiState.NoData)
             }
         }
     }

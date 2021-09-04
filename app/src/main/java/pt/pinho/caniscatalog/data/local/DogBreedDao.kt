@@ -1,21 +1,25 @@
 package pt.pinho.caniscatalog.data.local
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import pt.pinho.caniscatalog.data.model.DogBreed
 
 @Dao
 interface DogBreedDao {
     @Query("SELECT * FROM dog_breed")
-    fun getAll(): List<DogBreed>
+    suspend fun getAllBreeds(): List<DogBreed>
 
     @Query("SELECT * FROM dog_breed WHERE id = :breedId")
-    fun getById(breedId: Long): List<DogBreed>
+    suspend fun getById(breedId: Long): DogBreed?
 
     @Query("SELECT * FROM dog_breed WHERE id IN (:breedIds)")
     fun loadAllByIds(breedIds: LongArray): List<DogBreed>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(dogBreeds: List<DogBreed>)
+    suspend fun insertAll(dogBreeds: List<DogBreed>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSingleBreed(dobBreed: DogBreed)
 
     @Delete
     fun delete(dogBreed: DogBreed)

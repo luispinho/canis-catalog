@@ -16,7 +16,7 @@ class DogBreedSource(
             val dogBreedsResponse = dogBreedRepository.getDogBreeds(nextPage)
 
             LoadResult.Page(
-                data = dogBreedsResponse!!,
+                data = dogBreedsResponse,
                 prevKey = if (nextPage == 1) null else nextPage - 1,
                 nextKey = nextPage + 1
             )
