@@ -22,6 +22,7 @@ import androidx.paging.compose.items
 import coil.annotation.ExperimentalCoilApi
 import kotlinx.coroutines.flow.Flow
 import pt.pinho.caniscatalog.R
+import pt.pinho.caniscatalog.component.CenteredCircularLoader
 import pt.pinho.caniscatalog.data.model.DogBreed
 
 @ExperimentalCoilApi
@@ -75,7 +76,7 @@ fun DogBreedsGridView(lazyDogBreedList: LazyPagingItems<DogBreed>, navController
         lazyDogBreedList.apply {
             when {
                 loadState.refresh is LoadState.Loading -> {
-                    item { CircularProgressIndicator() }
+                    item { CenteredCircularLoader() }
                 }
                 loadState.refresh is LoadState.Error -> {
                     val e = lazyDogBreedList.loadState.refresh as LoadState.Error
@@ -102,7 +103,7 @@ fun DogBreedsListView(lazyDogBreedList: LazyPagingItems<DogBreed>, navController
         lazyDogBreedList.apply {
             when {
                 loadState.refresh is LoadState.Loading -> {
-                    item { CircularProgressIndicator() }
+                    item { CenteredCircularLoader() }
                 }
                 loadState.refresh is LoadState.Error -> {
                     val e = lazyDogBreedList.loadState.refresh as LoadState.Error

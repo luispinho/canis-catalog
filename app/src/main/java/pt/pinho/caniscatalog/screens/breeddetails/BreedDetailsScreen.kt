@@ -12,7 +12,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import pt.pinho.caniscatalog.R
 import pt.pinho.caniscatalog.component.CenteredCircularLoader
 import pt.pinho.caniscatalog.data.model.DogBreed
 import pt.pinho.caniscatalog.screens.UiState
@@ -38,22 +40,22 @@ fun BreedDetailsScreen(breedDetailsViewModel: BreedDetailsViewModel, breedId: Lo
         {
             Column {
                 Text(
-                    text = uiBreed.name,
+                    text = "${stringResource(R.string.breed_name)}: ${uiBreed.name}",
                     modifier = Modifier
                         .padding(start = 10.dp)
                 )
                 Text(
-                    text = uiBreed.breedGroup,
+                    text = "${stringResource(R.string.breed_group)}: ${uiBreed.breedGroup}",
                     modifier = Modifier
                         .padding(start = 10.dp)
                 )
                 Text(
-                    text = uiBreed.origin,
+                    text = "${stringResource(R.string.breed_origin)}: ${uiBreed.origin}",
                     modifier = Modifier
                         .padding(start = 10.dp)
                 )
                 Text(
-                    text = uiBreed.temperament,
+                    text = "${stringResource(R.string.breed_temperament)}: ${uiBreed.temperament}",
                     modifier = Modifier
                         .padding(start = 10.dp)
                 )

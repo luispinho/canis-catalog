@@ -12,9 +12,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
+import pt.pinho.caniscatalog.R
 import pt.pinho.caniscatalog.data.model.DogBreed
 
 @Composable
@@ -31,19 +33,19 @@ fun SearchResultListItem(dogBreed: DogBreed, navController: NavController) {
         ) {
 
             Text(
-                text = dogBreed.name,
+                text = "${stringResource(R.string.breed_name)}: ${dogBreed.name}",
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(start = 10.dp)
             )
             Text(
-                text = dogBreed.breedGroup,
+                text = "${stringResource(R.string.breed_group)}: ${dogBreed.breedGroup}",
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(start = 10.dp)
             )
             Text(
-                text = dogBreed.origin,
+                text = "${stringResource(R.string.breed_origin)}: ${dogBreed.origin}",
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(start = 10.dp)

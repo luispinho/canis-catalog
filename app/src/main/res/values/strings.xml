@@ -4,4 +4,10 @@
     <string name="search">Search</string>
     <string name="breed_details">Breed Details</string>
     <string name="show_list_as_grid">Show list as grid?</string>
+    <string name="breed_name">Breed name</string>
+    <string name="breed_category">Breed category</string>
+    <string name="breed_origin">Origin</string>
+    <string name="breed_temperament">Temperament</string>
+    <string name="breed_group">Group</string>
+
 </resources>
