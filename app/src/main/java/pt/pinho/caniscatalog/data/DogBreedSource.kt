@@ -1,5 +1,6 @@
 package pt.pinho.caniscatalog.data
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import pt.pinho.caniscatalog.data.model.DogBreed
@@ -13,7 +14,7 @@ class DogBreedSource(
         return try {
             val nextPage = params.key ?: 0
             val dogBreedsResponse = dogBreedRepository.getDogBreeds(nextPage)
-
+            
             LoadResult.Page(
                 data = dogBreedsResponse,
                 prevKey = if (nextPage == 1) null else nextPage - 1,

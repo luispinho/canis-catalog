@@ -1,6 +1,7 @@
 package pt.pinho.caniscatalog.screens.breeddetails
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -11,7 +12,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import pt.pinho.caniscatalog.R
 import pt.pinho.caniscatalog.shared.component.CenteredCircularLoader
@@ -34,36 +37,45 @@ fun BreedDetailsScreen(breedDetailsViewModel: BreedDetailsViewModel, breedId: Lo
         floatingActionButtonPosition = FabPosition.Center,
         floatingActionButton = {
             FloatingActionButton(onClick = { navController.popBackStack() }) {
-                Icon(Icons.Filled.ArrowBack, contentDescription = "Localized description")
+                Icon(Icons.Filled.ArrowBack, contentDescription = stringResource(id = R.string.back_button_localized_description))
             }
         }, content = {
-            if (uiState == UiState.Loaded) {
-                Column {
-                    Text(
-                        text = "${stringResource(R.string.breed_name)}: ${uiBreed.name}",
-                        modifier = Modifier
-                            .padding(start = 10.dp)
-                    )
-                    Text(
-                        text = "${stringResource(R.string.breed_group)}: ${uiBreed.breedGroup}",
-                        modifier = Modifier
-                            .padding(start = 10.dp)
-                    )
-                    Text(
-                        text = "${stringResource(R.string.breed_origin)}: ${uiBreed.origin}",
-                        modifier = Modifier
-                            .padding(start = 10.dp)
-                    )
-                    Text(
-                        text = "${stringResource(R.string.breed_temperament)}: ${uiBreed.temperament}",
-                        modifier = Modifier
-                            .padding(start = 10.dp)
-                    )
+            when (uiState) {
+                UiState.Loaded -> {
+                    Column (
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp)
+                    ) {
+                        Text(
+                            text = uiBreed.name,
+                            fontSize = 34.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(start = 10.dp)
+                        )
+                        Text(
+                            text = "${stringResource(R.string.breed_group)}: ${uiBreed.breedGroup}",
+                            modifier = Modifier
+                                .padding(start = 10.dp)
+                        )
+                        Text(
+                            text = "${stringResource(R.string.breed_origin)}: ${uiBreed.origin}",
+                            modifier = Modifier
+                                .padding(start = 10.dp)
+                        )
+                        Text(
+                            text = "${stringResource(R.string.breed_temperament)}: ${uiBreed.temperament}",
+                            modifier = Modifier
+                                .padding(start = 10.dp)
+                        )
+                    }
                 }
-            } else if (uiState == UiState.Loading) {
-                CenteredCircularLoader()
-            } else if (uiState == UiState.Loading) {
-                CenteredCircularLoader()
+                UiState.Loading -> {
+                    CenteredCircularLoader()
+                }
+                UiState.Loading -> {
+                    CenteredCircularLoader()
+                }
             }
         }
     )

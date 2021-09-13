@@ -13,7 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import pt.pinho.caniscatalog.R
@@ -33,10 +35,12 @@ fun SearchResultListItem(dogBreed: DogBreed, navController: NavController) {
         ) {
 
             Text(
-                text = "${stringResource(R.string.breed_name)}: ${dogBreed.name}",
+                text = dogBreed.name,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(start = 10.dp)
+                    .padding(start = 10.dp),
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
             )
             Text(
                 text = "${stringResource(R.string.breed_group)}: ${dogBreed.breedGroup}",

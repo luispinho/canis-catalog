@@ -13,6 +13,7 @@ class DogBreedRepository @Inject constructor(private val dogAPIService: DogAPISe
     suspend fun getDogBreeds(pageNumber: Int): List<DogBreed> {
         try {
             val response = dogAPIService.getDogBreeds(10, pageNumber)
+
             if (response.isSuccessful) {
                 response.body()?.let {
                     dogBreedDao.insertAll(it)

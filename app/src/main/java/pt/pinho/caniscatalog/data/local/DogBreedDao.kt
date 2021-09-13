@@ -5,8 +5,6 @@ import pt.pinho.caniscatalog.data.model.DogBreed
 
 @Dao
 interface DogBreedDao {
-    @Query("SELECT * FROM dog_breed")
-    suspend fun getAllBreeds(): List<DogBreed>
 
     @Query("SELECT * FROM dog_breed WHERE id = :breedId")
     suspend fun getById(breedId: Long): DogBreed?

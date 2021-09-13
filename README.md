@@ -21,7 +21,7 @@ In case you need a key, please open an issue and I'll see what can be done.
  - UI created using Jetpack Compose
  - Coil for image loading
  - API calls performed using Retrofit
- - Local data persistance with Room
+ - Local data persistence with Room
  - Dependency injection with Hilt
  - Pagination for the Home screen implemented using Paging 3
  - LiveData for UI to consume the data from the ViewModel
@@ -33,3 +33,5 @@ In case you need a key, please open an issue and I'll see what can be done.
  2. Add code coverage (implement unit and integration tests)
  3. Improve the error handling logic/messages when getting data from the API
  4. UI can use some adjustments/polish (mainly the details page can use some extra work)
+ 5. Listen for network changes and update the UI accordingly (either show a message saying the app is offline or fetch the data in case the connection is established successfully)
+ 6. Add pagination support to the Search results
